@@ -489,6 +489,7 @@ class KMKKeyboard:
         self._init(hid_type=hid_type, secondary_hid_type=secondary_hid_type, **kwargs)
         while True:
             self._main_loop()
+            print(self.active_layers)
 
     def _init(
         self,
