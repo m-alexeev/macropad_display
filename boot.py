@@ -1,21 +1,27 @@
-## Boot config File 
-import time 
-import board 
-import touchio 
+## Boot config File
+import time
+import board
+import touchio
+import json
 
-## Turn on / off USB features to on touching RX & TX pins 
-## Squeeze RX & TX Pins with Fingers to enable CIRCUITPY & REPL and Restart board
+import usb_cdc
+import storage
 
-# print("Boot File Loading...")
-
-# touchRxIn = touchio.TouchIn(board.RX)
-# touchTxIn = touchio.TouchIn(board.TX)
+print("Boot File Loading...")
 
 
-# if touchRxIn.raw_value > 1500 and touchTxIn.raw_value > 1500: 
-#     print("Disabling USB Features...")
-#     # Disable devices 
-#     import storage 
-#     import usb_cdc 
-#     storage.disable_usb_drive()abcabcfdeighdefffdefdefdefdefdefdefdeabcabcabcabcabcabcghi
-#     usb_cdc.disable()
+def read_config() -> None:
+	with open("./config.json", 'r') as f:
+		config = json.load(f)
+		
+		## Get config 
+		usb = config['USB']
+		repl = config['REPL']
+
+		if repl:
+			usb_cdc.enable()
+		else:
+			usb_cdc.disable()
+
+
+read_config()

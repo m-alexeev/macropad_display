@@ -5,14 +5,12 @@ import board
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.keys import KC
 from kmk.scanners import DiodeOrientation
-from kmk.modules.layers import Layers as _Layers
 from kmk.modules.encoder import EncoderHandler
-from kmk.keys import make_key
 from layers import Layers
 from menu import Menu
 
 menu = Menu(4)
-layers = Layers()
+layers = Layers(menu=menu)
 encoder = EncoderHandler()
 keyboard = KMKKeyboard()
 
@@ -53,33 +51,15 @@ keyboard.keymap = [
     ]
 ]
 
-class EncoderLayer(): 
-    def SetOther(self, layer, *args, **kwargs):
-        print(*args, **kwargs)
-        print(KC.TO(layer))
-        # print(KC.TO(1))
-
-    def SetLayer(self, layer, *args, **kwargs):
-        return KC.TO(layer)
-
-encoder_layer = EncoderLayer()
 
 
-make_key(
-    names=('MYKEY',),
-    on_press=lambda *args: encoder_layer.SetOther(1),
-)
-
-make_key(
-    names=('FUNC',),
-    on_press=lambda *args: KC.TO(0),
-)
+_____ = KC.TRNS
 
 encoder.map = [
-    ((encoder_layer.SetLayer(1), encoder_layer.SetLayer(3), KC.MYKEY),),
-    ((encoder_layer.SetLayer(2), encoder_layer.SetLayer(0), KC.FUNC),),
-    ((encoder_layer.SetLayer(3), encoder_layer.SetLayer(1), KC.FUNC),),
-    ((encoder_layer.SetLayer(0), encoder_layer.SetLayer(2), KC.FUNC),),
+    ((KC.TO(1), KC.TO(3), _____),),
+    ((KC.TO(2), KC.TO(0), _____),),
+    ((KC.TO(3), KC.TO(1), _____),),
+    ((KC.TO(0), KC.TO(2), _____),),
 ]
 if __name__ == '__main__':
     keyboard.go()
