@@ -1,7 +1,6 @@
 ## Boot config File
 import time
-import board
-import touchio
+import board, digitalio
 import json
 
 import usb_cdc
@@ -9,19 +8,29 @@ import storage
 
 print("Boot File Loading...")
 
+reset_button = digitalio.DigitalInOut(board.A2) #Encoder Switch
+reset_button.pull = digitalio.Pull.UP # Connected to ground so pull up
+
 
 def read_config() -> None:
 	with open("./config.json", 'r') as f:
 		config = json.load(f)
 		
-		## Get config 
-		usb = config['USB']
-		repl = config['REPL']
 
-		if repl:
-			usb_cdc.enable()
-		else:
-			usb_cdc.disable()
-
+def disable_usb() -> None:
+	if not reset_button.value: 
+		print("Enabling USB and REPL")
+		storage.enable_usb_drive()
+		usb_cdc.enable()
+	else:
+		print("Disabling USB and REPL")
+		# Disable USB and REPL if reset button not pressed
+		storage.disable_usb_drive()
+		usb_cdc.disable()
 
 read_config()
+
+# disable_usb()
+
+
+
