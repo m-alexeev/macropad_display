@@ -10,11 +10,6 @@ print("Boot File Loading...")
 
 reset_button = digitalio.DigitalInOut(board.A2) #Encoder Switch
 reset_button.pull = digitalio.Pull.UP # Connected to ground so pull up
-
-
-def read_config() -> None:
-	with open("./config.json", 'r') as f:
-		config = json.load(f)
 		
 
 def disable_usb() -> None:
@@ -28,7 +23,6 @@ def disable_usb() -> None:
 		storage.disable_usb_drive()
 		usb_cdc.disable()
 
-read_config()
 
 # disable_usb()
 
