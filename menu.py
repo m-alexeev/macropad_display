@@ -1,9 +1,6 @@
-import displayio
+from utils import read_txt_file
 
-class Cell: 
-  pass
-
-
+FILE_PATH = "./images/output"
 
 class Menu: 
   layers = []
@@ -12,8 +9,12 @@ class Menu:
   current_page = 0
   num_pages = 0
   
-  def __init__(self, width: int, height: int, layers) -> None:
-    self.rows = height
-    self.cols = width
-    self.num_pages = len(layers)
+  def __init__(self, pad_size: tuple[int, int], layers) -> None:
+    self.rows = pad_size[0]
+    self.cols = pad_size[1]
     self.layers = layers
+
+  def getPageData(self, page):
+    if page >= 0 and page < len(self.layers):
+      # return layer 
+      return self.layers[page]

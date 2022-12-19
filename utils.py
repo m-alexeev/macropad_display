@@ -23,7 +23,7 @@ def get_key(key):
 
 
 
-def create_image_arr(file): 
+def read_txt_file(file): 
   with open(file, 'r') as f: 
     lines = f.readlines()
 
@@ -65,4 +65,4 @@ def images_to_binary_txt(folder: str = "./images/", size:tuple[int,int] = (70,70
 
 
 if __name__ == "__main__":
-  images_to_binary_txt(size=(50,50))
+  images_to_binary_txt()

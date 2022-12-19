@@ -1,41 +1,49 @@
 print("Starting")
 
-import board
+import gc
+
+gc.collect()
+print(gc.mem_free())
+
+from board import D24, A3, D4, A0, A1, A2, D5, D6, D9, D10, D11, D12
 
 from kmk.kmk_keyboard import KMKKeyboard
 from kmk.keys import KC
 from kmk.scanners import DiodeOrientation
 from kmk.modules.encoder import EncoderHandler
-from layers import Layers, GIT_C, GIT_P, CPY, PST, DEL_LN,GIT_AA, CL_EXP_S
+from layers import Layers, GIT_C, GIT_P, CPY, PST, DEL_LN,GIT_AA, CL_EXP_S, icon_layer
 from menu import Menu
 from display import Display
 from controller import MenuController
-from utlis import create_image_arr
+from graphics import Graphics
+
+
+PAD_SIZE = (3,3)
 
 # Menu and Display Functionality
-display = Display(board.D24, board.A3, board.D4)
-menu = Menu(3, 3, [])
-menuController = MenuController(menu=menu, display=display)
+display = Display(D24, A3, D4)
+menu = Menu(PAD_SIZE, icon_layer)
+graphics = Graphics(display, PAD_SIZE, './images/icons.bmp', 40, 40)
+menuController = MenuController(menu=menu, graphics=graphics)
 
-display.create_grid(3, 3)
+
+# Initialize first layer
+graphics.draw_tiles(icon_layer[0])
 
 # Keyboard Config
 layers = Layers(controller=menuController)
 encoder = EncoderHandler()
 keyboard = KMKKeyboard()
 
-img_arr = create_image_arr('./images/res.txt')
-
-display.draw(img_arr)
 
 keyboard.modules = [layers, encoder]
 
 encoder.pins = (
-    (board.A0, board.A1, board.A2, False),
+    (A0, A1, A2, False),
 )
 # Keyboard Config 
-keyboard.col_pins = (board.D5, board.D6, board.D9)
-keyboard.row_pins = (board.D10, board.D11, board.D12)
+keyboard.col_pins = (D5, D6, D9)
+keyboard.row_pins = (D10, D11, D12)
 keyboard.diode_orientation = DiodeOrientation.COL2ROW
 
 
@@ -44,7 +52,7 @@ _____ = KC.TRNS
 xxxxx = KC.NO 
 
 keyboard.keymap = [
-    # Nump
+    # Custom
     [
         GIT_AA,GIT_C, GIT_P,
         CPY, PST, CL_EXP_S,
@@ -79,6 +87,3 @@ encoder.map = [
 
 if __name__ == '__main__':
     keyboard.go()
-
-
-

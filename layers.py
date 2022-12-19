@@ -1,20 +1,20 @@
 from kmk.modules.layers import Layers as _Layers
 from controller import MenuController
 from kmk.kmk_keyboard import KMKKeyboard
-from kmk.keys import KC, make_key
+from kmk.keys import KC
 from kmk.handlers.sequences import simple_key_sequence, send_string
-from utlis import set_config, get_key
+
 
 
 class Layers(_Layers):
     last_top_layer = 0
 
     def __init__(self, controller: MenuController = None):
-        self.controller= controller
+        self.controller = controller
         super().__init__()
 
     def after_hid_send(self, keyboard: KMKKeyboard):
-        if keyboard.active_layers[0] != self.last_top_layer and self.menu:
+        if keyboard.active_layers[0] != self.last_top_layer and self.controller:
             self.last_top_layer = keyboard.active_layers[0]
             self.controller.setPage(self.last_top_layer)
 
@@ -23,6 +23,32 @@ class Layers(_Layers):
 
 # MENU LAYERS CONFIG 
 
+
+# Define Icon Layer
+
+
+icon_layer = [
+    [
+        6, 7, 8,
+        4, 5, 10,
+        11, None, None
+    ], 
+    [
+        None, 3, None,
+        0, 1, 2, 
+        None, None, None 
+    ],
+    [
+        None, None, None,
+        None, None, None,
+        None, None, None 
+    ], 
+    [
+        None, None, None,
+        None, None, None,
+        None, None, None 
+    ]
+]
 
 
 # Git Keybinds
