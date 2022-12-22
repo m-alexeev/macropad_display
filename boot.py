@@ -24,7 +24,7 @@ def disable_usb() -> None:
 		usb_cdc.disable()
 
 
-# disable_usb()
+disable_usb()
 
 
 

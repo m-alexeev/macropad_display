@@ -9,7 +9,6 @@ def set_config(key, value, *args, **kwargs):
     with open("./config.json", 'w') as f:
       data = json.load(f)
       data[key] = value
-      print(data)
       f.write(json.dump())
   except Exception as e: 
     print(e)

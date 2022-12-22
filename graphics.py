@@ -40,12 +40,10 @@ class Graphics:
 
 
     def draw_tiles(self, tiles):
-        # print(tiles)
         for index, icon in enumerate(tiles): 
             # Tiles use 1 based indexing
             x = index % self.cols
             y = index // self.cols
-            print(x, y, icon)
             if icon is not None: 
                 self.icons[x, y] = icon
             else:

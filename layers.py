@@ -31,17 +31,17 @@ icon_layer = [
     [
         6, 7, 8,
         4, 5, 10,
-        11, None, None
+        9, None, None
     ], 
     [
-        None, 3, None,
+        21, 3, 22,
         0, 1, 2, 
-        None, None, None 
+        24, None, 23 
     ],
     [
-        None, None, None,
-        None, None, None,
-        None, None, None 
+        18, 19, 20,
+        15, 16, 17,
+        12, 13, 14 
     ], 
     [
         None, None, None,

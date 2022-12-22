@@ -2,8 +2,7 @@ print("Starting")
 
 import gc
 
-gc.collect()
-print(gc.mem_free())
+
 
 from board import D24, A3, D4, A0, A1, A2, D5, D6, D9, D10, D11, D12
 
@@ -56,17 +55,17 @@ keyboard.keymap = [
     [
         GIT_AA,GIT_C, GIT_P,
         CPY, PST, CL_EXP_S,
-        DEL_LN, KC.N2, KC.N3
+        DEL_LN, xxxxx, xxxxx
     ],
     # Arrow Key Layer
     [
         KC.HOME  , KC.UP  , KC.END,
         KC.LEFT  , KC.DOWN, KC.RIGHT,
-        KC.PGDOWN, KC.NO, KC.PGUP,
+        KC.PGDOWN, xxxxx, KC.PGUP,
     ],
     # Numpad Layer
     [   
-        GIT_C, KC.N8, KC.N9,
+        KC.N7, KC.N8, KC.N9,
         KC.N4, KC.N5, KC.N6,
         KC.N1, KC.N2, KC.N3
     ],
